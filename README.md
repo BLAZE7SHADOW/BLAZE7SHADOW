@@ -2,7 +2,7 @@
 
 # Shivam Govind Rao
 
-**Software Development Engineer · Full-Stack · AI-Powered Products**
+**AI FullStack Engineer · Builds AI products end-to-end, with frontend craft at the core**
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-www.shivamgovindrao.com-f59e0b?style=for-the-badge&logo=vercel&logoColor=black)](https://www.shivamgovindrao.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shivam-govind-rao-138881157/)
@@ -13,9 +13,11 @@
 
 ---
 
-I started as a frontend engineer and grew into the full stack — backend, cloud, AI pipelines, and RPA automation. At **Diagna AI** I owned FAXFlo end-to-end: 110+ React components, a 40-endpoint Node.js API, a distributed AWS document pipeline processing 1,000+ faxes daily, and the AI + voice automation that took the product live in a paying US clinic.
+I started as a frontend engineer and grew into owning products end-to-end — backend, cloud, AI pipelines, and RPA automation. At **Diagna AI** I was the first and sole engineer on **FAXFlo**: the complete React 19 clinical platform, a 40-endpoint Node.js API, a distributed AWS document pipeline processing 1,000+ faxes daily, and the AI + voice automation that took the product from a company pivot to its first paying US clinic.
 
 Before that, at **Oriserve**, I was the sole frontend engineer on **VoiceGenie.ai** — a generative-AI voice sales platform that went from 0 to $10K MRR in 11 months.
+
+Outside of work I'm building **[MotionStudio](https://motionstudio-six.vercel.app/)** solo — a browser-based video editor on Remotion with a real production backend: auth, quota, and an AWS Lambda cloud render pipeline alongside a free in-browser export path.
 
 ---
 
@@ -23,12 +25,38 @@ Before that, at **Oriserve**, I was the sole frontend engineer on **VoiceGenie.a
 
 | | |
 |---|---|
-| **110+** | React components shipped solo (FAXFlo) |
-| **1,000+** | Medical documents processed daily via AWS pipeline |
+| **1,000+** | Medical documents processed daily via the FAXFlo AWS pipeline |
 | **~95%** | AI document classification accuracy across 40+ categories |
+| **99%+** | AWS pipeline uptime (S3 → SQS → Textract → Bedrock) |
+| **40+** | REST API endpoints built solo (FAXFlo backend) |
 | **$10K MRR** | Built in 11 months as sole frontend engineer (VoiceGenie) |
 | **~70%** | Reduction in manual patient outreach via Voice AI automation |
-| **99%+** | AWS pipeline uptime (S3 → SQS → Textract → Bedrock) |
+| **7 engines** | MotionStudio's data/logic core — ~5K+ lines of strict TypeScript |
+
+---
+
+## Projects
+
+### [MotionStudio](https://motionstudio-six.vercel.app/) — browser video editor on Remotion
+*Live · actively building.* Place text, images, video, and audio on a frame-accurate timeline and export to MP4 — free in-browser (WebCodecs + OfflineAudioContext, Chrome/Edge) or via a quota-gated AWS Lambda cloud render. Full auth (Google OAuth, email/password, guest), device-based abuse prevention, background S3 asset upload so uploaded media renders on Lambda too.
+
+`Remotion` `React 19` `TypeScript` `Zustand` `Supabase` `AWS Lambda` `Vercel`
+
+[Live](https://motionstudio-six.vercel.app/) · [GitHub](https://github.com/BLAZE7SHADOW/MotionStudio)
+
+### [FAXFlo](https://www.diagna.ai) — Diagna AI
+Full-stack AI medical-document platform — clinical inbox, eFax triage, AI document classification, voice scheduling, RPA-driven EHR automation, and HIPAA-compliant analytics. Taken from a company pivot to its first paying US clinic, in production.
+
+`React 19` `Node.js` `AWS Bedrock` `Textract` `Robocorp` `FastAPI`
+
+[Live](https://www.diagna.ai)
+
+### [VoiceGenie.ai](https://voicegenie.ai) — Oriserve
+Generative-AI voice sales platform. Sole frontend engineer — dashboard, marketing site, and internal research tooling built from 0. Grew the product to $10K MRR in 11 months.
+
+`React` `Next.js` `TypeScript` `ElevenLabs` `HubSpot` `Cal.com`
+
+[Live](https://voicegenie.ai)
 
 ---
 
@@ -61,10 +89,18 @@ Before that, at **Oriserve**, I was the sole frontend engineer on **VoiceGenie.a
 
 ![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white)
 ![AWS Bedrock](https://img.shields.io/badge/AWS_Bedrock-FF9900?style=flat-square&logo=amazon-aws&logoColor=black)
+![AWS Lambda](https://img.shields.io/badge/AWS_Lambda-FF9900?style=flat-square&logo=awslambda&logoColor=white)
 ![Claude](https://img.shields.io/badge/Claude_(Anthropic)-D97706?style=flat-square)
 ![GPT-4o](https://img.shields.io/badge/GPT--4o-412991?style=flat-square&logo=openai&logoColor=white)
+![Amazon Nova](https://img.shields.io/badge/Amazon_Nova_Pro-FF9900?style=flat-square&logo=amazon-aws&logoColor=white)
 ![ElevenLabs](https://img.shields.io/badge/ElevenLabs-000000?style=flat-square)
 ![VAPI](https://img.shields.io/badge/VAPI-6366F1?style=flat-square)
+
+**Infra & Deploy**
+
+![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 
 **Automation & RPA**
 
@@ -77,7 +113,7 @@ Before that, at **Oriserve**, I was the sole frontend engineer on **VoiceGenie.a
 
 ## Currently building
 
-- **MotionStudio** — a browser-based video editor built on Remotion. Timeline engine, programmatic video generation, creative tooling. Early stage but the architecture is interesting.
+- **MotionStudio** — shipping new features solo: cloud render pipeline, background S3 asset upload, export UX.
 - Sharpening system design and DSA while exploring what's next.
 - Writing about building in the AI era.
 
