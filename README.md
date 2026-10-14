@@ -19,7 +19,7 @@ I like the full loop — build it, ship it, then go find out where it's actually
 
 Before that, at **Oriserve**, I built the frontend of **VoiceGenie**, a generative-AI voice sales platform — the customer dashboard and campaign builder in React/Redux, and the public marketing site on Next.js with server-side rendering. Grew from zero to $10K MRR in eleven months.
 
-Outside of work I build **PayOps AI**, a multi-agent system that investigates and resolves payment reconciliation failures with a human in the loop; **MotionStudio**, a browser-based video editor with a real production backend; and **ClinRAG**, a from-scratch RAG system where I benchmarked hybrid vs. dense retrieval on real clinical documents and reported the results honestly, including where hybrid didn't win.
+Outside of work I build **PayOps AI**, a multi-agent system that investigates and resolves payment reconciliation failures with a human in the loop; a **Hinglish Clinic Voice Agent**, a real-time voice receptionist that books, moves and cancels appointments in a live call, with its safety rules enforced in code and every latency stage measured; **MotionStudio**, a browser-based video editor with a real production backend; and **ClinRAG**, a from-scratch RAG system where I benchmarked hybrid vs. dense retrieval on real clinical documents and reported the results honestly, including where hybrid didn't win.
 
 ---
 
@@ -33,6 +33,8 @@ Outside of work I build **PayOps AI**, a multi-agent system that investigates an
 | **47+** | Nested iframes navigated in a legacy EHR RPA integration |
 | **7 / 7** | PayOps AI golden evals passing in live mode, plus adversarial and prompt-injection cases |
 | **850+** | Automated tests across the PayOps AI packages |
+| **61% → 99%** | Doctor-name speech recognition on phone audio, with per-clinic keyterms (Clinic Voice Agent, measured A/B) |
+| **14 / 14, 0 wrong actions** | Voice agent text evals in a sandboxed database: bookings, reschedules, cancels, prompt injection |
 | **4 RAGAS metrics** | Faithfulness, relevancy, precision, recall — benchmarked dense vs. hybrid retrieval (ClinRAG) |
 | **$10K MRR** | Reached in 11 months as the frontend owner (VoiceGenie) |
 | **0 → 1** | Took FAXFlo from company pivot to first paying clinic |
@@ -83,6 +85,18 @@ The product has to work with AI turned off, and the agent is only one actor alon
 ---
 
 ## Projects
+
+### [Hinglish Clinic Voice Agent](https://github.com/BLAZE7SHADOW/hinglish-clinic-voice-agent) — Real-Time Voice Receptionist
+*Ongoing · week 3 of an 8-week build.* A voice receptionist for small Indian clinics. Callers speak English or Hinglish, and it answers clinic questions, finds free slots, and books, reschedules and cancels appointments in a live call. Built on LiveKit Agents with streaming Deepgram STT, Gemini Flash and Cartesia TTS, a turn-detector model, barge-in and a backchannel filter, and provider fallbacks for each stage.
+
+- **Guards in code, not the prompt.** One agent with modes, each exposing only its own tools; every tool checks typed call state before acting. Dates like "kal shaam" are resolved by code, never the LLM, and no personal data is shared before phone-plus-birth-date verification.
+- **Writes that can't go wrong silently.** Code builds the booking read-back from the stored database row and speaks it word for word; a write happens only after a clear yes to that exact sentence. A DB unique constraint is the final guard against double booking, with slot holds, idempotency keys and "outcome unknown" on timeouts instead of blind retries.
+- **Measured, not claimed.** Per-stage latency telemetry (p50/p95) with every change logged next to task success; an experiment that didn't help was reverted. Doctor-name recognition on phone audio rose from 61% to 99%, slot search dropped from up to 1.2 s to about 200 ms, and barge-in stops the agent in under 0.4 s. Sandboxed text evals pass 14/14 with 0 wrong actions; 237 tests.
+- **Voice-tested, problems written up.** Each scripted voice-test run feeds a learning log (mechanism, options, fix, verification). The current end-to-end latency is above target, and the cause is diagnosed: the turn detector waits on numbers and short answers. Phase-aware endpointing is the fix in progress.
+
+`Python` `LiveKit Agents` `WebRTC` `Deepgram` `Gemini` `Cartesia` `Postgres (Supabase)` `asyncpg` `pydantic` `pytest`
+
+[GitHub](https://github.com/BLAZE7SHADOW/hinglish-clinic-voice-agent)
 
 ### [ClinRAG](https://github.com/BLAZE7SHADOW/ClinRAG) — Clinical Document RAG with Hybrid Retrieval + RAGAS Evals
 A RAG system over real clinical drug labels (FDA DailyMed), built with a proper evaluation harness as the actual deliverable, not a demo. Docling extraction, three chunking strategies, Cohere embeddings via Bedrock with FAISS dense retrieval, BM25 + dense hybrid search via reciprocal rank fusion, and Claude Haiku generation constrained to answer only from retrieved excerpts.
@@ -153,6 +167,14 @@ Generative-AI voice sales platform. Built the customer dashboard and AI campaign
 ![RAG](https://img.shields.io/badge/RAG-6366F1?style=flat-square)
 ![FAISS](https://img.shields.io/badge/FAISS-0467DF?style=flat-square)
 ![RAGAS](https://img.shields.io/badge/RAGAS-10B981?style=flat-square)
+
+**Voice AI**
+
+![LiveKit](https://img.shields.io/badge/LiveKit_Agents-1F1F1F?style=flat-square)
+![WebRTC](https://img.shields.io/badge/WebRTC-333333?style=flat-square&logo=webrtc&logoColor=white)
+![Deepgram](https://img.shields.io/badge/Deepgram_STT-13EF93?style=flat-square&logoColor=black)
+![Cartesia](https://img.shields.io/badge/Cartesia_TTS-000000?style=flat-square)
+![Sarvam](https://img.shields.io/badge/Sarvam_AI-FF6B35?style=flat-square)
 ![ElevenLabs](https://img.shields.io/badge/ElevenLabs-000000?style=flat-square)
 
 **Cloud & Automation**
@@ -169,6 +191,7 @@ Generative-AI voice sales platform. Built the customer dashboard and AI campaign
 
 ## Currently
 
+- Building the **Hinglish Clinic Voice Agent** in measured steps: name and number capture, phase-aware endpointing to cut turn-taking latency, then the V1 demo, an Indian phone line and Hinglish audio.
 - Finishing **PayOps AI** — accessibility and end-to-end tests, then a free hosted demo (Vercel, Render, Supabase) that runs on recorded agent responses so anyone can try it.
 - Shipping new features on **MotionStudio** solo — cloud render pipeline, background asset upload, export UX.
 - Extending **ClinRAG** — persisted vector store, reranking evaluation, larger document set.
@@ -190,7 +213,7 @@ Generative-AI voice sales platform. Built the customer dashboard and AI campaign
 
 <div align="center">
 
-**Open to Full-Stack and AI Systems roles — especially healthcare and fintech**
+**Open to Full-Stack, AI Systems and Voice AI roles — especially healthcare and fintech**
 
 [www.shivamgovindrao.com](https://www.shivamgovindrao.com)
 
